@@ -3,11 +3,9 @@
 	import { pb } from '$lib/pb';
 	import { onMount } from 'svelte';
 
-	onMount(() => {
-		if (pb.authStore.isValid) {
-			goto('/app');
-		} else {
-			goto('/login');
-		}
+	onMount(async () => {
+		await pb.authStore.clear();
+
+		goto('/login');
 	});
 </script>

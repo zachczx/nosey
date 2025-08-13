@@ -22,17 +22,22 @@
 	});
 </script>
 
-<main class="grid content-center justify-items-center gap-8">
-	<h1 class="text-4xl">Spray Logs</h1>
+<main class="grid w-full xl:grid-cols-2">
+	<div class="grid content-center justify-items-center gap-8">
+		<h2 class="text-6xl font-semibold">Spray Logs</h2>
 
-	{#await results}
-		<div class="loader"></div>
-	{:then results}
-		<ul class="list-disc ps-6">
-			{#each results as result}
-				{@const formatted = dayjs(result.created).format('DD/MM/YY')}
-				<li>{formatted}</li>
-			{/each}
-		</ul>
-	{/await}
+		{#await results}
+			<div class="loader"></div>
+		{:then results}
+			<ul class="list-disc ps-6">
+				{#each results as result}
+					{@const formatted = dayjs(result.created).format('DD/MM/YY')}
+					<li>{formatted}</li>
+				{/each}
+			</ul>
+		{/await}
+	</div>
+	<div class="grid content-center justify-items-center gap-8">
+		<h2 class="text-6xl font-semibold">Calendar</h2>
+	</div>
 </main>

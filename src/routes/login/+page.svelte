@@ -22,8 +22,15 @@
 	}
 </script>
 
-<form class="grid w-full max-w-sm content-center gap-4">
-	<input type="text" name="email" bind:value={email} class="input w-full" />
-	<input type="password" name="password" bind:value={password} class="input w-full" />
-	<button class="btn btn-primary" onclick={() => submitHandler()}>Submit</button>
+<form class="grid w-full max-w-sm content-center">
+	<fieldset class="fieldset">
+		<legend class="fieldset-legend">Username</legend>
+		<input type="text" name="email" bind:value={email} class="input w-full" />
+	</fieldset>
+
+	<fieldset class="fieldset">
+		<legend class="fieldset-legend">Password</legend>
+		<input type="password" name="password" bind:value={password} class="input w-full" />
+	</fieldset>
+	<button class="btn mt-4 btn-primary" onclick={() => submitHandler()}>Login</button>
 </form>

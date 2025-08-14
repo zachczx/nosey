@@ -49,7 +49,7 @@
 	let options: Calendar.Options = $derived.by(() => {
 		return {
 			view: 'dayGridMonth',
-			events: [...times]
+			events: []
 			// dayHeaderFormat: (time: Date) => {
 			// 	return dayjs(time).format('ddd').toString() + '\r\n' + dayjs(time).format('D').toString();
 			// },

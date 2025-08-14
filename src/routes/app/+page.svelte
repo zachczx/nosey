@@ -63,7 +63,7 @@
 
 <main class="grid w-full content-start justify-items-center gap-8">
 	<h2 class="text-6xl font-semibold">Spray Logs</h2>
-	<button class="btn btn-lg btn-primary" onclick={() => handleClick()}>Just Sprayed!</button>
+	<button class="btn btn-lg btn-primary" onclick={handleClick}>Just Sprayed!</button>
 	<!-- {#await results}
 			<div class="loader"></div>
 		{:then results}
@@ -74,6 +74,19 @@
 				{/each}
 			</ul>
 		{/await} -->
-	<div class="w-full px-2 lg:px-12"><Calendar plugins={[DayGrid]} {options} /></div>
+	<div class="w-full px-2 lg:px-12">
+		{#key results}
+			<Calendar plugins={[DayGrid]} {options} />
+		{/key}
+	</div>
 </main>
-<span class="ec ec-time-grid"></span>
+<span class="ec ec-time-grid ec-title hidden"></span>
+
+<style>
+	:global {
+		.ec-title {
+			font-size: 1.5rem;
+			font-weight: 700 !important;
+		}
+	}
+</style>

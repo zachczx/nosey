@@ -9,6 +9,6 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="grid min-h-dvh w-full content-start justify-items-center p-4">
+<div class="grid min-h-dvh w-full content-start justify-items-center p-1 lg:p-4">
 	{@render children?.()}
 </div>

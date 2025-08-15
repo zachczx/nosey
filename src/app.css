@@ -13,6 +13,14 @@
 		font-family: 'Space Grotesk Variable', sans-serif;
 	}
 
+	a {
+		text-decoration: underline;
+		&:hover {
+			color: var(--color-primary);
+			font-weight: 500;
+		}
+	}
+
 	/* space-grotesk-latin-wght-normal */
 	@font-face {
 		font-family: 'Space Grotesk Variable';

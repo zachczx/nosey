@@ -6,6 +6,7 @@
 	import { Calendar, DayGrid } from '@event-calendar/core';
 	import utc from 'dayjs/plugin/utc';
 	import timezone from 'dayjs/plugin/timezone';
+	import PageWrapper from '$lib/PageWrapper.svelte';
 
 	dayjs.extend(utc);
 	dayjs.extend(timezone);
@@ -52,7 +53,7 @@
 		return {
 			view: 'dayGridMonth',
 			events: [...times],
-
+			selectBackgroundColor: 'red',
 			eventBackgroundColor: '#4a4a7d',
 			eventContent: () => {
 				return `✔ Sprayed`;
@@ -61,10 +62,11 @@
 	});
 </script>
 
-<main class="grid w-full content-start justify-items-center gap-8">
-	<h2 class="text-6xl font-semibold">Spray Logs</h2>
-	<button class="btn btn-lg btn-primary" onclick={handleClick}>Just Sprayed!</button>
-	<!-- {#await results}
+<PageWrapper {pb}>
+	<main class="grid w-full content-start justify-items-center gap-8">
+		<h2 class="text-6xl font-semibold">Spray Logs</h2>
+		<button class="btn btn-xl btn-primary" onclick={handleClick}>Just Sprayed!</button>
+		<!-- {#await results}
 			<div class="loader"></div>
 		{:then results}
 			<ul class="list-disc ps-6">
@@ -74,12 +76,13 @@
 				{/each}
 			</ul>
 		{/await} -->
-	<div class="w-full px-2 lg:px-12">
-		{#key results}
-			<Calendar plugins={[DayGrid]} {options} />
-		{/key}
-	</div>
-</main>
+		<div class="w-full px-2 lg:px-12">
+			{#key results}
+				<Calendar plugins={[DayGrid]} {options} />
+			{/key}
+		</div>
+	</main>
+</PageWrapper>
 <span class="ec ec-time-grid ec-title hidden"></span>
 
 <style>
@@ -87,6 +90,10 @@
 		.ec-title {
 			font-size: 1.5rem;
 			font-weight: 700 !important;
+		}
+
+		.ec-today {
+			background-color: var(--color-primary-content) !important;
 		}
 	}
 </style>

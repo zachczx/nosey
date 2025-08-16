@@ -11,19 +11,8 @@
 	dayjs.extend(utc);
 	dayjs.extend(timezone);
 
-	let results = $state([]);
-	let times = $derived.by(() => {
-		let times: string[] = [];
-		if (results && results.length > 0) {
-			for (const r of results) {
-				console.log('before: ', r.time);
-				const n = dayjs.utc(r.time).tz('Asia/Singapore');
-				console.log('after: ', n.format());
-				times.push(n);
-			}
-		}
-		return times;
-	});
+	let results: SprayDB[] | undefined = $state([]);
+
 	onMount(async () => {
 		if (!pb.authStore.isValid) {
 			goto('/login');
@@ -49,15 +38,26 @@
 		});
 	}
 
+	let times = $derived.by(() => {
+		let times: Calendar.EventInput[] = [];
+		if (results && results.length > 0) {
+			for (const r of results) {
+				const n = dayjs.utc(r.time).tz('Asia/Singapore');
+				times.push({ start: n.toDate(), end: n.toDate(), title: `— Sprayed` });
+			}
+		}
+		return times;
+	});
+
 	let options: Calendar.Options = $derived.by(() => {
 		return {
 			view: 'dayGridMonth',
 			events: [...times],
 			selectBackgroundColor: 'red',
-			eventBackgroundColor: '#4a4a7d',
-			eventContent: () => {
-				return `✔ Sprayed`;
-			}
+			eventBackgroundColor: '#4a4a7d'
+			// eventContent: () => {
+			// 	return `✔ Sprayed`;
+			// }
 		};
 	});
 </script>
@@ -95,5 +95,9 @@
 		.ec-today {
 			background-color: var(--color-primary-content) !important;
 		}
+
+		/* .ec-event-title {
+			margin-inline-start: 1em;
+		} */
 	}
 </style>

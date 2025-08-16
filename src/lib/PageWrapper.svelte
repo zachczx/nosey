@@ -1,6 +1,10 @@
 <script>
-	let { pb, children } = $props();
+	let { pb, children, title } = $props();
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
 
 <div
 	class="grid min-h-dvh w-full grid-rows-[auto_1fr] content-start justify-items-center p-1 lg:p-4"

@@ -12,6 +12,7 @@
 	let password = $state('');
 
 	async function submitHandler() {
+		spinner = true;
 		const cleanEmail = email.toLowerCase().trim();
 		const cleanPassword = password.trim();
 
@@ -20,15 +21,18 @@
 			console.log(authData);
 			if (authData.token) {
 				addToast('success', 'Logged in successfully!');
+				spinner = false;
 				goto('/app');
 			}
 		} catch (err) {
 			console.log(err);
 		}
 	}
+
+	let spinner = $state(false);
 </script>
 
-<PageWrapper {pb}>
+<PageWrapper title="Login" {pb}>
 	<form class="grid w-full max-w-sm content-center">
 		<div class="mb-8">
 			<h1 class="text-7xl font-medium text-primary">Nosey</h1>
@@ -56,6 +60,12 @@
 			<legend class="fieldset-legend">Password</legend>
 			<input type="password" name="password" bind:value={password} class="input w-full" />
 		</fieldset>
-		<button class="btn mt-4 btn-primary" onclick={() => submitHandler()}>Login</button>
+		<button class="btn mt-4 btn-primary" onclick={() => submitHandler()}>
+			{#if !spinner}
+				Login
+			{:else}
+				<span class="loading loading-md loading-spinner"></span>
+			{/if}
+		</button>
 	</form>
 </PageWrapper>

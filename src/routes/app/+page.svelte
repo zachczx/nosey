@@ -30,6 +30,7 @@
 	});
 
 	async function handleClick() {
+		spinner = true;
 		const result = await pb.collection('spray').create({
 			user: pb.authStore.record?.id,
 			time: dayjs.tz(new Date(), 'Asia/Singapore')
@@ -37,6 +38,7 @@
 
 		if (result.id) {
 			addToast('success', 'Added successfully!');
+			spinner = false;
 		}
 
 		results = await pb.collection('spray').getFullList({
@@ -72,15 +74,26 @@
 	});
 
 	let singleDayModal = $state() as HTMLDialogElement;
+	let spinner = $state(false);
 </script>
 
-<PageWrapper {pb}>
+<svelte:head>
+	<title>Spray Logs</title>
+</svelte:head>
+
+<PageWrapper title="Spray Logs" {pb}>
 	<main class="grid w-full content-start justify-items-center gap-8">
 		<h2 class="text-6xl font-semibold">Spray Logs</h2>
 		<button
-			class="btn flex items-center gap-2 btn-xl btn-primary max-md:w-full"
-			onclick={handleClick}><MaterialSymbolsAdd class="size-[1.3em]" />Add Spray</button
-		>
+			class="btn flex min-w-54 items-center gap-2 btn-xl btn-primary max-md:w-full"
+			onclick={handleClick}
+			><MaterialSymbolsAdd class="size-[1.3em]" />
+			{#if !spinner}
+				Add Spray
+			{:else}
+				<span class="loading loading-md loading-spinner"></span>
+			{/if}
+		</button>
 		<div class="w-full px-2 lg:px-12">
 			{#key results}
 				<Calendar plugins={[DayGrid, Interaction]} {options} />

@@ -11,6 +11,7 @@
 	let password = $state('');
 
 	async function submitHandler() {
+		spinner = true;
 		const cleanEmail = email.toLowerCase().trim();
 		const cleanPassword = password.trim();
 		try {
@@ -32,15 +33,18 @@
 			const authData = await pb.collection('users').authWithPassword(email, password);
 			console.log(authData);
 			if (authData.token) {
+				spinner = false;
 				goto('/app');
 			}
 		} catch (err) {
 			console.log(err);
 		}
 	}
+
+	let spinner = $state(false);
 </script>
 
-<PageWrapper {pb}>
+<PageWrapper title="Register" {pb}>
 	<form class="grid w-full max-w-sm content-center">
 		<div class="mb-8">
 			<h1 class="text-7xl font-medium text-primary">Nosey</h1>
@@ -67,6 +71,12 @@
 			<legend class="fieldset-legend">Password</legend>
 			<input type="password" name="password" bind:value={password} class="input w-full" />
 		</fieldset>
-		<button class="btn mt-4 btn-primary" onclick={() => submitHandler()}>Register</button>
+		<button class="btn mt-4 btn-primary" onclick={() => submitHandler()}>
+			{#if !spinner}
+				Register
+			{:else}
+				<span class="loading loading-md loading-spinner"></span>
+			{/if}
+		</button>
 	</form>
 </PageWrapper>

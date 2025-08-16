@@ -72,7 +72,6 @@
 	});
 
 	let singleDayModal = $state() as HTMLDialogElement;
-	$inspect(singleDay);
 </script>
 
 <PageWrapper {pb}>

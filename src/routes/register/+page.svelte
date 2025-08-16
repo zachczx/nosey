@@ -11,12 +11,14 @@
 	let password = $state('');
 
 	async function submitHandler() {
+		const cleanEmail = email.toLowerCase().trim();
+		const cleanPassword = password.trim();
 		try {
 			const data = {
-				email: email,
+				email: cleanEmail,
 				emailVisibility: true,
-				password: password,
-				passwordConfirm: password
+				password: cleanPassword,
+				passwordConfirm: cleanPassword
 			};
 
 			const record = await pb.collection('users').create(data);

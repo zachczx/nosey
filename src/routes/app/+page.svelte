@@ -81,16 +81,6 @@
 			class="btn flex items-center gap-2 btn-xl btn-primary max-md:w-full"
 			onclick={handleClick}><MaterialSymbolsAdd class="size-[1.3em]" />Add Spray</button
 		>
-		<!-- {#await results}
-			<div class="loader"></div>
-		{:then results}
-			<ul class="list-disc ps-6">
-				{#each results as result}
-					{@const formatted = dayjs(result.created).format('DD/MM/YY (ddd)')}
-					<li>{formatted}</li>
-				{/each}
-			</ul>
-		{/await} -->
 		<div class="w-full px-2 lg:px-12">
 			{#key results}
 				<Calendar plugins={[DayGrid, Interaction]} {options} />

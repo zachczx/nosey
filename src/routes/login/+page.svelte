@@ -11,8 +11,11 @@
 	let password = $state('');
 
 	async function submitHandler() {
+		const cleanEmail = email.toLowerCase().trim();
+		const cleanPassword = password.trim();
+
 		try {
-			const authData = await pb.collection('users').authWithPassword(email, password);
+			const authData = await pb.collection('users').authWithPassword(cleanEmail, cleanPassword);
 			console.log(authData);
 			if (authData.token) {
 				goto('/app');

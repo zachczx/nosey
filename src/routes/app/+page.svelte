@@ -47,7 +47,8 @@
 		let times: Calendar.EventInput[] = [];
 		if (results && results.length > 0) {
 			for (const r of results) {
-				const n = dayjs.utc(r.time).tz('Asia/Singapore');
+				const n = dayjs.utc(r.time); //.tz('Asia/Singapore');
+				console.log(n.toDate());
 				times.push({ start: n.toDate(), end: n.toDate(), title: `— Sprayed` });
 			}
 		}

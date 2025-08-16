@@ -39,6 +39,7 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
+		"@ark-ui/svelte": "^5.3.4",
 		"@fontsource-variable/space-grotesk": "^5.2.8",
 		"dayjs": "^1.11.13",
 		"pocketbase": "^0.26.2"

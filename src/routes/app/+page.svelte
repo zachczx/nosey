@@ -7,6 +7,7 @@
 	import utc from 'dayjs/plugin/utc';
 	import timezone from 'dayjs/plugin/timezone';
 	import PageWrapper from '$lib/PageWrapper.svelte';
+	import { addToast } from '$lib/ui/ArkToaster.svelte';
 
 	dayjs.extend(utc);
 	dayjs.extend(timezone);
@@ -26,12 +27,16 @@
 	});
 
 	async function handleClick() {
-		const resp = await pb.collection('spray').create({
+		const result = await pb.collection('spray').create({
 			user: pb.authStore.record?.id,
 			time: dayjs.tz(new Date(), 'Asia/Singapore')
 		});
 
-		console.log(resp);
+		console.log(result);
+
+		if (result.id) {
+			addToast('success', 'Added successfully!');
+		}
 
 		results = await pb.collection('spray').getFullList({
 			sort: '-created'

@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import PageWrapper from '$lib/PageWrapper.svelte';
 	import { pb } from '$lib/pb';
+	import { addToast } from '$lib/ui/ArkToaster.svelte';
 
 	if (pb.authStore.isValid) {
 		goto('/app');
@@ -18,6 +19,7 @@
 			const authData = await pb.collection('users').authWithPassword(cleanEmail, cleanPassword);
 			console.log(authData);
 			if (authData.token) {
+				addToast('success', 'Logged in successfully!');
 				goto('/app');
 			}
 		} catch (err) {

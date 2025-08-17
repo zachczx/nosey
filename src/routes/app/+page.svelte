@@ -3,9 +3,9 @@
 	import { pb } from '$lib/pb';
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
-	import { Calendar, DayGrid, Interaction } from '@event-calendar/core';
 	import utc from 'dayjs/plugin/utc';
 	import timezone from 'dayjs/plugin/timezone';
+	import { Calendar, DayGrid, Interaction } from '@event-calendar/core';
 	import PageWrapper from '$lib/PageWrapper.svelte';
 	import { addToast } from '$lib/ui/ArkToaster.svelte';
 	import MaterialSymbolsCheck from '$lib/assets/svg/MaterialSymbolsCheck.svelte';

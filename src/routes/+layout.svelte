@@ -4,8 +4,6 @@
 	import { pb } from '$lib/pb';
 
 	let { children } = $props();
-
-	let nav = $derived(pb);
 </script>
 
 <svelte:head>
